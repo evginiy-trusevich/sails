@@ -37,7 +37,8 @@ module.exports = {
                 return next(err);
             }
 
-            res.json(stock);
+            // res.json(stock);
+            res.redirect('/customer/show/' + stock.owner);
 
         })
     },

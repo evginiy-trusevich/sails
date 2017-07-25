@@ -26,14 +26,14 @@ module.exports = {
 
     show: function (req, res, next) {
 
-        Customer.findOne( req.param('id'), function foundCustomer ( err, customer) {
+        Customer.findOne(req.param('id')).populateAll().exec(function (err, customer) {
 
-            if(err){
+            if (err) {
                 return next(err);
 
             }
 
-            if(!customer){
+            if (!customer) {
                 return next();
             }
 
@@ -42,6 +42,7 @@ module.exports = {
             });
 
         })
+
     },
 
     index: function (req, res, next) {
