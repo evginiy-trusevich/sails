@@ -1,0 +1,50 @@
+<script
+        src="http://code.jquery.com/jquery-3.2.1.js"
+        integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+        crossorigin="anonymous"></script>
+
+<script src="/js/socket.io.js"></script>
+<style type="text/css">
+    #incoming-chat-window{
+        height: 300px;
+        overflow: auto;
+    }
+    .chatName{
+        font-size: 12px;
+        text-transform: uppercase;
+        color: darkgreen;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#outgoing-chat-form').submit(function (e) {
+            e.preventDefault();
+            let charField = $('#outgoing-chat-field');
+            socket.emit('send message',charField.val())
+            charField.val('');
+        });
+
+        var socket = io('http://localhost');
+
+        socket.on('news', function (data) {
+            $('#incoming-chat-window').append(data + '<br>');
+        });
+
+        socket.on('new message', function (data) {
+            $('#incoming-chat-window').append('<p><span class="chatName"><%= chat.id %>: </span>'+data+'</p>');
+        });
+    });
+
+</script>
+<h3>Hello <%= chat.name %></h3>
+
+<div id="incoming-chat-window"></div>
+
+<form id="outgoing-chat-form">
+    <input type="text" size="50" id="outgoing-chat-field">
+    <input type="submit">
+</form>

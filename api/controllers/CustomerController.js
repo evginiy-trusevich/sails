@@ -97,7 +97,7 @@ module.exports = {
         Customer.destroy(req.param('id')).exec(function () {
             res.redirect('/customer/');
         })
-    }
+    },
 
 };
 
