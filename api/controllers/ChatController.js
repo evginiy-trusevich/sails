@@ -15,7 +15,7 @@ module.exports = {
 
     create: function (req, res, next) {
 
-        Chat.create( req.params.all(), function customerCreated ( err, chatData) {
+        Chat.create( req.params.all(), function chatCreated ( err, chatData) {
 
             if(err){
                 return next(err);
