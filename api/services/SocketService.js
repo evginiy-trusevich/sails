@@ -4,7 +4,6 @@ var app = require('http').createServer();
 var io = require('socket.io')(app);
 app.listen(process.env.PORT || 80);
 
-
 io.on('connection', function (socket) {
 
     console.log('Socket id is : ', socket.id);
