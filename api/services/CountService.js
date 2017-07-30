@@ -41,4 +41,4 @@ class Count {
 
 }
 
-// module.exports = new Count(false);
+module.exports = new Count(false);
