@@ -24,7 +24,7 @@
         $('#outgoing-chat-form').submit(function (e) {
             e.preventDefault();
             let charField = $('#outgoing-chat-field');
-            socket.emit('send message',charField.val())
+            socket.emit('send message','<span class="chatName">' + $('#chatName').val() +': ' + '</span>' + charField.val());
             charField.val('');
         });
 
@@ -35,12 +35,14 @@
         });
 
         socket.on('new message', function (data) {
-            $('#incoming-chat-window').append('<p><span class="chatName"><%= chat.id %>: </span>'+data+'</p>');
+            $('#incoming-chat-window').append('<p>'+data+'</p>');
         });
     });
 
 </script>
 <h3>Hello <%= chat.name %></h3>
+
+<input type="hidden" id="chatName" value="<%= chat.name %>">
 
 <div id="incoming-chat-window"></div>
 

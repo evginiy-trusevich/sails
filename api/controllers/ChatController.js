@@ -40,6 +40,8 @@ module.exports = {
                 return next();
             }
 
+            console.log(chatData);
+
             res.view({
                 chat: chatData
             });
