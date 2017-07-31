@@ -2,16 +2,16 @@
 
 var app = require('http').createServer();
 var io = require('socket.io')(app);
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 80);
 
 
 // var io = require('socket.io-client');
-var socket = io.connect('https://calm-earth-42681.herokuapp.com/',
-    {reconnect: true, transports : ['websocket'], path: '/socket.io'});
-
-socket.on('connect', function (socket) {
-    console.log('Connected!');
-});
+// var socket = io.connect('https://calm-earth-42681.herokuapp.com/',
+//     {reconnect: true, transports : ['websocket'], path: '/socket.io'});
+//
+// socket.on('connect', function (socket) {
+//     console.log('Connected!');
+// });
 
 io.on('connection', function (socket) {
 
