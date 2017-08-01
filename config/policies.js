@@ -48,4 +48,17 @@ module.exports.policies = {
 		// before letting any users feed our rabbits
 		// feed : ['isNiceToAnimals', 'hasRabbitFood']
 	// }
+
+  "AuthController": {
+      "*" : ["isAuth","is/Admin","rolePolicy"],
+      "auth" : true
+  },
+
+    "ArticlesController" : {
+        "find" : ["isAuth","is/Admin","is/Manager","is/User","rolePolicy"],
+        "findOne" : ["isAuth","is/Admin","is/Manager" ,"is/User","rolePolicy"],
+        "create" : ["isAuth","is/Admin","rolePolicy"],
+        "update" : ["isAuth","is/Admin","is/Manager","rolePolicy"],
+        "destroy" : ["isAuth","is/Admin","rolePolicy"]
+    }
 };

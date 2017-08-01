@@ -5,13 +5,6 @@ var io = require('socket.io')(app);
 app.listen(process.env.PORT || 80);
 
 
-// var io = require('socket.io-client');
-// var socket = io.connect('https://calm-earth-42681.herokuapp.com/',
-//     {reconnect: true, transports : ['websocket'], path: '/socket.io'});
-//
-// socket.on('connect', function (socket) {
-//     console.log('Connected!');
-// });
 
 io.on('connection', function (socket) {
 
@@ -21,6 +14,17 @@ io.on('connection', function (socket) {
 
     socket.on('send message', function (data) {
         io.sockets.emit('new message', data)
+    });
+
+
+    //beta room
+    socket.on('send message2', function (data) {
+        io.sockets.in('beta').emit('new message', data);
+    });
+
+    socket.on('subscribe',function (data) {
+        socket.join(data.room);
+        console.log(io.sockets.adapter.rooms);
     });
 
 });

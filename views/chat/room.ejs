@@ -20,11 +20,19 @@
 <script>
 
     $(document).ready(function () {
-
+//default room
         $('#outgoing-chat-form').submit(function (e) {
             e.preventDefault();
             let charField = $('#outgoing-chat-field');
             socket.emit('send message','<span class="chatName">' + $('#chatName').val() +': ' + '</span>' + charField.val());
+            charField.val('');
+        });
+
+        //beta room
+        $('#outgoing-chat-form2').submit(function (e) {
+            e.preventDefault();
+            let charField = $('#outgoing-chat-field2');
+            socket.emit('send message2','<span class="chatName">' + $('#chatName').val() +': ' + '</span>' + charField.val());
             charField.val('');
         });
 
@@ -36,6 +44,14 @@
 
         socket.on('new message', function (data) {
             $('#incoming-chat-window').append('<p>'+data+'</p>');
+        });
+
+        $('#room').on('click',function (e) {
+            e.preventDefault();
+            var data = {
+              room: 'beta'
+            };
+            socket.emit('subscribe', data);
         });
     });
 
@@ -50,3 +66,12 @@
     <input type="text" size="50" id="outgoing-chat-field">
     <input type="submit">
 </form>
+
+To beta room
+<div id="incoming-chat-window2"></div>
+
+<form id="outgoing-chat-form2">
+    <input type="text" size="50" id="outgoing-chat-field2">
+    <input type="submit">
+</form>
+<button id="room">Join Room</button>

@@ -1,0 +1,12 @@
+{
+  "source": {
+    "include": [
+      "api/controllers/AuthController.js",
+      "api/policies/isAuth.js",
+      "api/policies/rolePolicy.js",
+      "api/policies/is/Admin.js",
+      "api/policies/is/Manager.js",
+      "api/policies/is/User.js"
+    ]
+  }
+}
